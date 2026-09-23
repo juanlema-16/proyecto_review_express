@@ -168,9 +168,6 @@ Patrones: **Repository**, **DTO** (`aPublico()`), **Factory** (`nuevo()` / `nuev
 `desde()`) y **Singleton** (la conexión en `src/config/db.js`). MVC es la arquitectura
 general, no un patrón más.
 
-Más detalle en [documentacion/modelo-datos.md](documentacion/modelo-datos.md) y
-[documentacion/estructura.md](documentacion/estructura.md).
-
 ## Decisiones
 
 - **La sesión vive en una cookie httpOnly**, no en `localStorage` ni en la cabecera
