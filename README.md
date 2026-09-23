@@ -50,7 +50,7 @@ rutas -> controladores -> servicios -> repositorios -> MongoDB
 ```
 
 Patrones: Repository, DTO, Factory y Singleton, sobre MVC. El detalle está en
-[backend/README.md](backend/README.md) y en [backend/documentacion/](backend/documentacion).
+[backend/README.md](backend/README.md).
 
 ## Flujo de trabajo
 
