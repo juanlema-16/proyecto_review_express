@@ -1,0 +1,39 @@
+{
+    "name": "proyecto-review",
+    "version": "1.0.0",
+    "description": "API y aplicación web para gestionar información de programas de televisión",
+    "type": "module",
+    "main": "src/servidor.js",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "inicio": "node src/servidor.js",
+        "desarrollo": "node --watch src/servidor.js",
+        "demo": "node scripts/demo.js",
+        "indices": "node scripts/indices.js",
+        "semilla": "node scripts/semilla.js",
+        "semilla:reset": "node scripts/semilla.js --reset",
+        "pruebas": "node scripts/pruebas/ejecutar.js",
+        "simulacion": "node scripts/simulacion-frontend.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.6",
+        "dotenv": "^18.0.3",
+        "express": "^5.2.1",
+        "express-rate-limit": "^8.7.0",
+        "express-validator": "^7.3.2",
+        "jsonwebtoken": "^9.0.3",
+        "mongodb": "^7.6.0",
+        "passport": "^0.7.0",
+        "passport-jwt": "^4.0.1",
+        "semver": "^7.8.5",
+        "swagger-ui-express": "^5.0.1"
+    },
+    "devDependencies": {
+        "mongodb-memory-server": "^11.3.0"
+    }
+}
