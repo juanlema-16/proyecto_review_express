@@ -6,7 +6,7 @@ y cartoons, con sus capítulos, su reparto y sus productoras.
 | carpeta | qué es |
 |---|---|
 | [backend/](backend) | API REST en Node con Express y el driver nativo de MongoDB |
-| frontend/ | interfaz web en HTML, CSS y JavaScript puros (en construcción) |
+| [frontend/](frontend) | interfaz web completa en HTML, CSS y JavaScript puros, sin dependencias |
 
 ## Arrancar
 
@@ -14,6 +14,14 @@ y cartoons, con sus capítulos, su reparto y sus productoras.
 cd backend
 npm install
 npm run demo        # MongoDB en memoria, datos de ejemplo, sin configurar nada
+```
+
+Eso ya deja la interfaz mínima en `http://localhost:3000`. Para la interfaz completa, en
+otra terminal:
+
+```bash
+cd frontend
+npm run inicio      # http://localhost:4000, reenvía /api al puerto 3000
 ```
 
 Para usar MongoDB Atlas: copiá `backend/.env.example` a `backend/.env`, completalo y usá
@@ -30,6 +38,9 @@ Para usar MongoDB Atlas: copiá `backend/.env.example` a `backend/.env`, complet
 cd backend
 npm run pruebas      # integración contra un MongoMemoryReplSet
 npm run simulacion   # el recorrido del frontend, incluida la caída de la base
+
+cd ../frontend
+npm run pruebas      # la interfaz completa contra la API real
 ```
 
 ## Arquitectura

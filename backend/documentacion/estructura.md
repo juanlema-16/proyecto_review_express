@@ -24,7 +24,16 @@ backend/
 │   ├── middlewares/             autenticación, autorización, versión, límites, errores
 │   ├── errores/                 AppError y su jerarquía
 │   └── utilidades/              identificadores y conversión de valores
-├── publico/                     interfaz gráfica que sirve este servidor
+├── publico/                     interfaz mínima que sirve este servidor
+│   ├── index.html
+│   ├── css/estilos.css
+│   └── js/
+│       ├── principal.js         rutas por hash, menú según el rol, favoritos, 401
+│       ├── enrutador.js         lectura del hash y navegar()
+│       ├── estado.js            el usuario de la sesión
+│       ├── componentes.js       escapado, tarjetas y estados de carga/error/vacío
+│       ├── api/api.js           único módulo que llama a fetch
+│       └── vistas/              catálogo, programa y actor, acceso, favoritos, admin
 ├── scripts/
 │   ├── indices.js               crea los índices
 │   ├── semilla.js               datos de ejemplo, idempotente, --reset

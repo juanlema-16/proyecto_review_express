@@ -11,6 +11,7 @@ import { pruebasFavoritos } from './suites/favoritos.js';
 import { pruebasVersion } from './suites/version.js';
 import { pruebasLimites } from './suites/limites.js';
 import { pruebasSemilla } from './suites/semilla.js';
+import { pruebasInterfaz } from './suites/interfaz.js';
 
 const entornoPrueba = await levantarEntornoPrueba();
 const { base, api, entorno } = entornoPrueba;
@@ -56,6 +57,7 @@ const suites = [
     ['Transacciones', pruebasTransacciones],
     ['Favoritos', pruebasFavoritos],
     ['Versionado con semver', pruebasVersion],
+    ['Interfaz servida por Express', pruebasInterfaz],
     ['Límite de peticiones', pruebasLimites],
     ['Semilla idempotente', pruebasSemilla]
 ];

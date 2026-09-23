@@ -63,7 +63,7 @@ Usuarios que deja la semilla:
 | `npm run indices` | crea o confirma los índices |
 | `npm run semilla` | carga los datos de ejemplo sin duplicar nada |
 | `npm run semilla:reset` | vacía las colecciones y vuelve a cargarlas |
-| `npm run pruebas` | pruebas de integración contra un MongoMemoryReplSet |
+| `npm run pruebas` | pruebas de integración contra un MongoMemoryReplSet, incluida la interfaz de `publico/` |
 | `npm run simulacion` | recorre el consumo del frontend, incluida la caída de la base |
 
 Las pruebas, la demo y la simulación levantan su propio MongoDB en memoria: no tocan la
@@ -137,6 +137,21 @@ El cliente manda la versión que acepta en la cabecera `Accept-Version`, con cua
 rango que entienda semver (`1.x`, `^1.0.0`, `~1.0`). Si la versión de la API no lo
 satisface, la respuesta es 409. Si la cabecera no es un rango válido, 400. Sin cabecera
 se asume la versión actual, que siempre viaja de vuelta en `X-API-Version`.
+
+## Interfaz
+
+Hay dos interfaces sobre esta misma API, las dos en HTML, CSS y JavaScript puros, sin
+frameworks ni proceso de build:
+
+- **`publico/`**, mínima, la sirve este mismo servidor con `express.static` en
+  `http://localhost:3000`. Tiene login, registro, catálogo con filtro por categoría,
+  detalle con capítulos y reparto, ficha de actor, favoritos y el panel de administración.
+  `publico/js/api/api.js` es el único módulo que llama a `fetch`.
+- **[frontend/](../frontend)**, completa, con su propio servidor que reenvía `/api` a esta
+  API para quedar en el mismo origen.
+
+En las dos, un 401 lleva al login y el menú de administración solo se le muestra al
+administrador. Eso es cosmético: la autorización real la hace el backend en cada endpoint.
 
 ## Arquitectura
 
