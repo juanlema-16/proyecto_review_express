@@ -1,0 +1,15 @@
+{
+    "name": "proyecto-review-web",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Interfaz web de Proyecto Review: HTML, CSS y JavaScript puros, sin dependencias",
+    "type": "module",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "inicio": "node servidor.js",
+        "pruebas": "node scripts/pruebas.js"
+    },
+    "license": "MIT"
+}

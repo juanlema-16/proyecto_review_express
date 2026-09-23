@@ -1,0 +1,350 @@
+/* ---- botones ---- */
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radio-chico);
+    background: var(--acento);
+    color: var(--sobre-acento);
+    font: inherit;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.boton:hover { background: var(--acento-fuerte); }
+.boton:active { transform: translateY(1px); }
+.boton:disabled { opacity: 0.55; cursor: progress; }
+
+.boton-secundario {
+    background: var(--superficie);
+    color: var(--texto);
+    border-color: var(--borde);
+}
+
+.boton-secundario:hover { background: var(--superficie-2); }
+
+.boton-peligro {
+    background: transparent;
+    color: var(--peligro);
+    border-color: color-mix(in srgb, var(--peligro) 40%, transparent);
+}
+
+.boton-peligro:hover { background: var(--peligro-suave); }
+
+.boton-chico {
+    padding: 6px 12px;
+    font-size: 0.88rem;
+}
+
+.boton-icono {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--texto-suave);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.boton-icono:hover { background: var(--superficie-2); color: var(--texto); }
+
+/* ---- chips y etiquetas ---- */
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 20px;
+}
+
+.chip {
+    padding: 7px 16px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    background: var(--superficie);
+    color: var(--texto);
+    font-weight: 550;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.chip:hover { border-color: var(--acento); }
+
+.chip[aria-current="page"] {
+    background: var(--texto);
+    border-color: var(--texto);
+    color: var(--fondo);
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--acento-suave);
+    color: var(--acento-fuerte);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* ---- campos y formularios ---- */
+
+.formulario {
+    display: grid;
+    gap: 16px;
+}
+
+.formulario-campos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px 16px;
+}
+
+.campo {
+    display: grid;
+    gap: 5px;
+    align-content: start;
+}
+
+.campo-ancho { grid-column: 1 / -1; }
+
+.campo label {
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.obligatorio { color: var(--acento); }
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    background: var(--superficie);
+    color: var(--texto);
+    font: inherit;
+}
+
+textarea { resize: vertical; }
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+[aria-invalid="true"] {
+    border-color: var(--peligro);
+}
+
+.campo-ayuda {
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+}
+
+.campo-error {
+    color: var(--peligro);
+    font-size: 0.85rem;
+    font-weight: 550;
+}
+
+.campo-error:empty { display: none; }
+
+.formulario-error {
+    padding: 10px 14px;
+    border-radius: var(--radio-chico);
+    background: var(--peligro-suave);
+    color: var(--peligro);
+    font-weight: 550;
+}
+
+.formulario-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.buscador input {
+    min-width: min(320px, 100%);
+    padding-left: 38px;
+    background: var(--superficie) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%23888' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 12px center;
+}
+
+/* ---- estados ---- */
+
+.estado {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 48px 20px;
+    border: 1px dashed var(--borde);
+    border-radius: var(--radio);
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+.estado p { margin: 0; max-width: 46ch; }
+
+.estado-cargando {
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.estado-error {
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--peligro) 35%, transparent);
+    background: var(--peligro-suave);
+    color: var(--texto);
+}
+
+.estado-titulo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--peligro);
+}
+
+.girador {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--borde);
+    border-top-color: var(--acento);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* ---- avisos ---- */
+
+.avisos {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 50;
+    display: grid;
+    gap: 8px;
+    max-width: min(380px, calc(100vw - 32px));
+}
+
+.aviso {
+    padding: 12px 16px;
+    border-radius: var(--radio-chico);
+    background: var(--texto);
+    color: var(--fondo);
+    box-shadow: var(--sombra-alta);
+    font-weight: 550;
+    animation: entrar 0.2s ease-out;
+}
+
+.aviso-exito { background: var(--exito); color: #fff; }
+.aviso-error { background: var(--peligro); color: #fff; }
+.aviso-saliendo { animation: salir 0.25s ease-in forwards; }
+
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } }
+@keyframes salir { to { opacity: 0; transform: translateY(8px); } }
+
+/* ---- diálogos ---- */
+
+.dialogo {
+    width: min(460px, calc(100vw - 24px));
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: var(--superficie);
+    color: var(--texto);
+    box-shadow: var(--sombra-alta);
+}
+
+.dialogo-ancho { width: min(760px, calc(100vw - 24px)); }
+
+.dialogo::backdrop {
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(2px);
+}
+
+.dialogo-cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--borde);
+    background: var(--superficie);
+}
+
+.dialogo-cabecera h2 { margin: 0; font-size: 1.15rem; }
+
+.dialogo-cuerpo { padding: 18px; }
+
+/* ---- tablas ---- */
+
+.tabla-contenedor {
+    overflow-x: auto;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: var(--superficie);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: middle;
+}
+
+.tabla th {
+    background: var(--superficie-2);
+    color: var(--texto-suave);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.tabla tbody tr:last-child td { border-bottom: 0; }
+.tabla tbody tr:hover { background: color-mix(in srgb, var(--superficie-2) 50%, transparent); }
+
+.tabla-acciones {
+    white-space: nowrap;
+    text-align: right !important;
+}
+
+.tabla-acciones .boton + .boton { margin-left: 6px; }
+
+/* en el teléfono cada fila es una tarjeta con sus títulos */
+@media (max-width: 640px) {
+    .tabla thead { display: none; }
+    .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; }
+    .tabla tr { padding: 10px 0; border-bottom: 1px solid var(--borde); }
+    .tabla td { border: 0; padding: 4px 14px; }
+    .tabla td[data-titulo]::before {
+        content: attr(data-titulo);
+        display: block;
+        color: var(--texto-suave);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+    .tabla-acciones { text-align: left !important; padding-top: 8px !important; }
+}
