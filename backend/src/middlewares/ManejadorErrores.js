@@ -28,15 +28,16 @@ const ERRORES_DE_MONGO = [
 
 const ERRORES_DE_TOKEN = ['JsonWebTokenError', 'TokenExpiredError', 'NotBeforeError'];
 
-// el orden importa: el índice de personajes también tiene "nombre"
-const MENSAJES_DUPLICADO = [
-    { campo: 'temporada', mensaje: 'Ese número de capítulo ya existe en esa temporada' },
-    { campo: 'actorId', mensaje: 'Ese actor ya interpreta a ese personaje en ese programa' },
-    { campo: 'titulo', mensaje: 'Ya existe un programa con ese título' },
-    { campo: 'correo', mensaje: 'Ese correo ya está registrado' },
-    { campo: 'nombreUsuario', mensaje: 'Ese nombre de usuario ya está tomado' },
-    { campo: 'nombre', mensaje: 'Ya existe un registro con ese nombre' }
-];
+// el mensaje del 11000 trae el nombre del índice que chocó: los nombres salen de config/indices.js
+const MENSAJES_POR_INDICE = {
+    programa_titulo_unico: 'Ya existe un programa con ese título',
+    capitulo_numero_unico_por_temporada: 'Ese número de capítulo ya existe en esa temporada',
+    personaje_actor_unico: 'Ese actor ya interpreta a ese personaje en ese programa',
+    categoria_nombre_unico: 'Ya existe una categoría con ese nombre',
+    productora_nombre_unico: 'Ya existe una productora con ese nombre',
+    usuario_correo_unico: 'Ese correo ya está registrado',
+    usuario_nombre_unico: 'Ese nombre de usuario ya está tomado'
+};
 
 export class ManejadorErrores {
     constructor(registrar = console.error) {
@@ -44,27 +45,22 @@ export class ManejadorErrores {
     }
 
     // el índice único puede llegar suelto o dentro de un error de escritura masiva
-    patronDuplicado(error) {
+    duplicado(error) {
         // writeErrors es un objeto si falló una escritura y una lista si fallaron varias
         const [escritura] = [].concat(error?.writeErrors ?? []);
-        const codigo = error?.code ?? escritura?.code;
-        if (codigo !== 11000) return null;
-        return error?.keyPattern ?? escritura?.err?.keyPattern ?? {};
-    }
+        if ((error?.code ?? escritura?.code) !== 11000) return null;
 
-    mensajeDuplicado(patron) {
-        const campos = Object.keys(patron);
-        const conocido = MENSAJES_DUPLICADO.find((opcion) => campos.includes(opcion.campo));
-        return conocido ? conocido.mensaje : 'Ya existe un registro con esos datos';
+        const texto = String(escritura?.errmsg ?? error.message ?? '');
+        const indice = texto.match(/index: (\S+)/)?.[1];
+        const mensaje = MENSAJES_POR_INDICE[indice] ?? 'Ya existe un registro con esos datos';
+        return new DuplicadoError(mensaje, { indice: indice ?? null });
     }
 
     traducir(error) {
         if (error instanceof AppError) return error;
 
-        const patron = this.patronDuplicado(error);
-        if (patron) {
-            return new DuplicadoError(this.mensajeDuplicado(patron), { campos: Object.keys(patron) });
-        }
+        const duplicado = this.duplicado(error);
+        if (duplicado) return duplicado;
         if (error?.type === 'entity.parse.failed') {
             return new ValidacionError('El cuerpo de la petición no es un JSON válido');
         }
