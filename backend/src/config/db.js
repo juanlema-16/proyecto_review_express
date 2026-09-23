@@ -19,10 +19,11 @@ export class Conexion {
         return Conexion.#instancia;
     }
 
-    async conectar({ uri = entorno.mongo.uri, base = entorno.mongo.base } = {}) {
+    // esperaMs: cuánto espera el driver a un servidor antes de rendirse y dar 503
+    async conectar({ uri = entorno.mongo.uri, base = entorno.mongo.base, esperaMs = 8000 } = {}) {
         if (this.#base) return this.#base;
         try {
-            this.#cliente = new MongoClient(uri, { serverSelectionTimeoutMS: 8000 });
+            this.#cliente = new MongoClient(uri, { serverSelectionTimeoutMS: esperaMs });
             await this.#cliente.connect();
             this.#base = this.#cliente.db(base);
             return this.#base;
